@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import PostalMime from 'postal-mime'
 import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box,
   Table,
   TableCaption,
@@ -15,7 +20,19 @@ type Props = {
   mail: string
 }
 
-type MailAddress = {
+type MailHeaderRecord = {
+  key: string
+  value: string
+}
+type MailAttachmentRecord = {
+  filename: string
+  mimeType: string
+  disposition: string
+  related: boolean
+  contentId: string
+  content: any
+}
+type MailAddressRecord = {
   name: string
   address: string
 }
@@ -27,35 +44,43 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
 
   const [errors, setErrors] = useState([])
 
+  const [headers, setHeaders] = useState<MailHeaderRecord[]>([])
   const [mailDate, setMailDate] = useState('')
   const [mailMessageId, setMailMessageId] = useState('')
   const [subject, setSubject] = useState('')
   const [mailText, setMailText] = useState('')
   const [returnPath, setReturnPath] = useState('')
-  const [mailFrom, setMailFrom] = useState<MailAddress>({
+  const [mailFrom, setMailFrom] = useState<MailAddressRecord>({
     name: '',
     address: '',
   })
-  const [replyTo, setReplyTo] = useState<MailAddress>({ name: '', address: '' })
-  const [mailTo, setMailTo] = useState<MailAddress[]>([])
+  const [attachments, setAttachments] = useState<MailAttachmentRecord[]>([])
+  const [replyTo, setReplyTo] = useState<MailAddressRecord>({
+    name: '',
+    address: '',
+  })
+  const [mailTo, setMailTo] = useState<MailAddressRecord[]>([])
 
   useEffect(() => {
     new PostalMime()
       .parse(Buffer.from(mail))
       .then((email) => {
         // console.log(email)
-        // console.table(email.headers)
-        // console.log(email.attachments)
         // console.log(email.html)
-        setErrors([])
+
+        if (!email?.messageId || !email?.subject) {
+          setErrors(['メールデータの解析に失敗しました'])
+          return
+        }
 
         setMailDate(email.date)
         setMailMessageId(email.messageId)
         setSubject(email.subject)
         setMailText(email.text)
         setReturnPath(email.returnPath)
-
-        setMailTo(email.to)
+        setHeaders(email.headers ?? [])
+        setAttachments(email.attachments ?? [])
+        setMailTo(email.to ?? [])
         setMailFrom({
           name: email?.from?.name ?? '',
           address: email?.from?.address ?? '',
@@ -64,6 +89,8 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
           name: email?.replyTo?.name ?? '',
           address: email?.replyTo?.address ?? '',
         })
+
+        setErrors([])
       })
       .catch((err) => {
         console.error(err)
@@ -88,6 +115,28 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
 
   return (
     <Box>
+      <Accordion allowMultiple>
+        <AccordionItem>
+          <h2>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                Headers
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel pb={4}>
+            <Table>
+              {headers.map((header, index) => (
+                <Tr key={`header-${index}-${header.key}`}>
+                  <Td>{header.key}</Td>
+                  <Td>{header.value}</Td>
+                </Tr>
+              ))}
+            </Table>
+          </AccordionPanel>
+        </AccordionItem>
+      </Accordion>
       <Table variant="simple">
         <Tbody>
           <Tr>
@@ -97,10 +146,6 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
           <Tr>
             <Td>messageId</Td>
             <Td>{mailMessageId}</Td>
-          </Tr>
-          <Tr>
-            <Td>Heders</Td>
-            <Td>not supported</Td>
           </Tr>
           <Tr>
             <Td>returnPath</Td>
@@ -136,6 +181,27 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
           </Tr>
         </Tbody>
       </Table>
+      <Accordion allowMultiple>
+        <AccordionItem>
+          <h2>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                添付ファイル
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel pb={2}>
+            <Table>
+              {attachments.map((attachment, index) => (
+                <Tr key={`header-${index}-${attachment.contentId}`}>
+                  <Td>{attachment.filename}</Td>
+                </Tr>
+              ))}
+            </Table>
+          </AccordionPanel>
+        </AccordionItem>
+      </Accordion>
       <Box mx={5} my={2}>
         <Textarea
           value={mailText}
