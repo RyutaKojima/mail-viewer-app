@@ -172,10 +172,6 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
             </Td>
           </Tr>
           <Tr>
-            <Td>添付ファイル</Td>
-            <Td>not supported</Td>
-          </Tr>
-          <Tr>
             <Td>件名</Td>
             <Td>{subject}</Td>
           </Tr>
