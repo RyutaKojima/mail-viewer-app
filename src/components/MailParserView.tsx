@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PostalMime from 'postal-mime'
 import {
+  useClipboard,
   Accordion,
   AccordionButton,
   AccordionIcon,
@@ -13,8 +14,11 @@ import {
   Td,
   Textarea,
   Tr,
+  Text,
 } from '@chakra-ui/react'
+
 import MailAddressView from './MailAddressView'
+import CopyText from './CopyText'
 
 type Props = {
   mail: string
@@ -98,6 +102,11 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
       })
   }, [mail])
 
+  const { hasCopied: hasCopiedSubject, onCopy: onCopySubject } =
+    useClipboard(subject)
+  const { hasCopied: hasCopiedText, onCopy: onCopyText } =
+    useClipboard(mailText)
+
   if (errors.length > 0) {
     return (
       <Table>
@@ -172,8 +181,13 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
             </Td>
           </Tr>
           <Tr>
-            <Td>件名</Td>
-            <Td>{subject}</Td>
+            <Td>
+              <Text>件名</Text>
+            </Td>
+            <Td>
+              {subject}
+              <CopyText hasCopied={hasCopiedSubject} onCopy={onCopySubject} />
+            </Td>
           </Tr>
         </Tbody>
       </Table>
@@ -199,6 +213,7 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
         </AccordionItem>
       </Accordion>
       <Box mx={5} my={2}>
+        <CopyText hasCopied={hasCopiedText} onCopy={onCopyText} />
         <Textarea
           value={mailText}
           minH="400px"
