@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Box, Center, chakra, Grid, Textarea } from '@chakra-ui/react'
+import { Box, Center, chakra, Grid, Textarea, useToast } from '@chakra-ui/react'
 import { EmailIcon } from '@chakra-ui/icons'
 import React from 'react'
 import dynamic from 'next/dynamic'
@@ -9,11 +9,43 @@ const MailParserView = dynamic(() => import('../components/MailParserView'), {
 })
 
 export const Index = (): JSX.Element => {
+  const toast = useToast()
   const [value, setValue] = React.useState('')
+
+  const toastUploadError = () => {
+    toast({
+      title: 'アップロードエラー',
+      description: 'アップロード可能なのは.emlファイルを１ファイルのみです',
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+    })
+  }
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value
     setValue(inputValue)
+  }
+
+  const handleDrop = (e) => {
+    e.preventDefault()
+
+    if (e.dataTransfer.files.length !== 1) {
+      toastUploadError()
+      return
+    }
+
+    const targetFile = e.dataTransfer.files[0]
+    if (!targetFile.name.includes('.eml')) {
+      toastUploadError()
+      return
+    }
+
+    const fr = new FileReader()
+    fr.readAsText(targetFile)
+    fr.onload = function () {
+      setValue(String(fr.result))
+    }
   }
 
   return (
@@ -45,7 +77,8 @@ export const Index = (): JSX.Element => {
             <Textarea
               value={value}
               onChange={handleInputChange}
-              placeholder="ここにメールデータを入力"
+              onDropCapture={handleDrop}
+              placeholder="メールデータを入力 OR .emlファイルをドロップ"
               w="100%"
               h="100%"
               border="none"
