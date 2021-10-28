@@ -53,6 +53,7 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
   const [mailMessageId, setMailMessageId] = useState('')
   const [subject, setSubject] = useState('')
   const [mailText, setMailText] = useState('')
+  const [mailHtml, setMailHtml] = useState('')
   const [returnPath, setReturnPath] = useState('')
   const [mailFrom, setMailFrom] = useState<MailAddressRecord>({
     name: '',
@@ -81,6 +82,7 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
         setMailMessageId(email.messageId)
         setSubject(email.subject)
         setMailText(email.text)
+        setMailHtml(email.html)
         setReturnPath(email.returnPath)
         setHeaders(email.headers ?? [])
         setAttachments(email.attachments ?? [])
@@ -106,6 +108,8 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
     useClipboard(subject)
   const { hasCopied: hasCopiedText, onCopy: onCopyText } =
     useClipboard(mailText)
+  const { hasCopied: hasCopiedHtml, onCopy: onCopyHtml } =
+    useClipboard(mailHtml)
 
   if (errors.length > 0) {
     return (
@@ -213,9 +217,18 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
         </AccordionItem>
       </Accordion>
       <Box mx={5} my={2}>
-        <CopyText hasCopied={hasCopiedText} onCopy={onCopyText} />
+        text/plain <CopyText hasCopied={hasCopiedText} onCopy={onCopyText} />
         <Textarea
           value={mailText}
+          minH="400px"
+          isFullWidth={true}
+          isReadOnly={true}
+        />
+      </Box>
+      <Box mx={5} my={2}>
+        text/html <CopyText hasCopied={hasCopiedHtml} onCopy={onCopyHtml} />
+        <Textarea
+          value={mailHtml}
           minH="400px"
           isFullWidth={true}
           isReadOnly={true}
