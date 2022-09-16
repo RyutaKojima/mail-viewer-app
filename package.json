@@ -12,8 +12,8 @@
     "test-all": "yarn lint && yarn type-check && yarn src/test"
   },
   "dependencies": {
-    "@chakra-ui/icons": "1.0.16",
-    "@chakra-ui/react": "1.6.10",
+    "@chakra-ui/icons": "1.1.7",
+    "@chakra-ui/react": "1.8.9",
     "@emotion/react": "11.5.0",
     "@emotion/styled": "11.3.0",
     "framer-motion": "4.1.17",
