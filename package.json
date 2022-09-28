@@ -18,7 +18,7 @@
     "@emotion/styled": "11.10.4",
     "framer-motion": "4.1.17",
     "next": "latest",
-    "postal-mime": "1.0.12",
+    "postal-mime": "1.0.13",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
