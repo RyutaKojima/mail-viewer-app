@@ -221,7 +221,7 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
         <Textarea
           value={mailText}
           minH="400px"
-          isFullWidth={true}
+          width="full"
           isReadOnly={true}
         />
       </Box>
@@ -230,7 +230,7 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
         <Textarea
           value={mailHtml}
           minH="400px"
-          isFullWidth={true}
+          width="full"
           isReadOnly={true}
         />
       </Box>
