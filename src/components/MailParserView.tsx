@@ -65,6 +65,8 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
     address: '',
   })
   const [mailTo, setMailTo] = useState<MailAddressRecord[]>([])
+  const [mailCc, setMailCc] = useState<MailAddressRecord[]>([])
+  const [mailBcc, setMailBcc] = useState<MailAddressRecord[]>([])
 
   useEffect(() => {
     new PostalMime()
@@ -87,6 +89,8 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
         setHeaders(email.headers ?? [])
         setAttachments(email.attachments ?? [])
         setMailTo(email.to ?? [])
+        setMailCc(email.cc ?? [])
+        setMailBcc(email.bcc ?? [])
         setMailFrom({
           name: email?.from?.name ?? '',
           address: email?.from?.address ?? '',
@@ -175,6 +179,22 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
             <Td>
               {mailTo.map((to, index) => (
                 <MailAddressView key={`to-${index}`} mailAddress={to} />
+              ))}
+            </Td>
+          </Tr>
+          <Tr>
+            <Td>Cc</Td>
+            <Td>
+              {mailCc.map((cc, index) => (
+                <MailAddressView key={`cc-${index}`} mailAddress={cc} />
+              ))}
+            </Td>
+          </Tr>
+          <Tr>
+            <Td>Bcc</Td>
+            <Td>
+              {mailBcc.map((bcc, index) => (
+                <MailAddressView key={`bcc-${index}`} mailAddress={bcc} />
               ))}
             </Td>
           </Tr>
