@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Textarea, useToast } from '@chakra-ui/react'
+import { Box, Input, Textarea, useToast } from '@chakra-ui/react'
 
 type Props = {
   inputRawMail: string
@@ -28,15 +28,16 @@ export const LeftPane: React.FC<Props> = ({
     onChange(inputValue)
   }
 
-  const handleDrop = (e) => {
-    e.preventDefault()
-
-    if (e.dataTransfer.files.length !== 1) {
+  const readFile = (
+    files: File | null,
+    handleLoaded: (inputValue: string) => void
+  ) => {
+    if (files?.length !== 1) {
       toastUploadError()
       return
     }
 
-    const targetFile = e.dataTransfer.files[0]
+    const targetFile = files[0]
     if (!targetFile.name.includes('.eml')) {
       toastUploadError()
       return
@@ -46,8 +47,24 @@ export const LeftPane: React.FC<Props> = ({
     fr.readAsText(targetFile)
     fr.onload = function () {
       const inputValue = String(fr.result)
-      onChange(inputValue)
+      handleLoaded(inputValue)
     }
+  }
+
+  const handleChangeFile = (e) => {
+    e.preventDefault()
+
+    const files = e.target?.files
+
+    readFile(files, (inputValue) => onChange(inputValue))
+  }
+
+  const handleDrop = (e) => {
+    e.preventDefault()
+
+    const files = e.dataTransfer?.files
+
+    readFile(files, (inputValue) => onChange(inputValue))
   }
 
   return (
@@ -65,9 +82,12 @@ export const LeftPane: React.FC<Props> = ({
         onDropCapture={handleDrop}
         placeholder="メールデータを入力 OR .emlファイルをドロップ"
         w="100%"
-        h="100%"
-        border="none"
+        h="calc(100% - 48px)"
+        mb="8px"
+        borderWidth="1px"
       />
+
+      <Input type="file" onChange={handleChangeFile} h="40px" p={1} />
     </Box>
   )
 }
