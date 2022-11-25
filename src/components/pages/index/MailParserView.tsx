@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PostalMime from 'postal-mime'
 import {
-  useClipboard,
   Accordion,
   AccordionButton,
   AccordionIcon,
@@ -12,9 +11,10 @@ import {
   TableCaption,
   Tbody,
   Td,
+  Text,
   Textarea,
   Tr,
-  Text,
+  useClipboard,
 } from '@chakra-ui/react'
 
 import MailAddressView from '../../MailAddressView'
@@ -42,10 +42,6 @@ type MailAddressRecord = {
 }
 
 export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
-  if (!mail) {
-    return <Box>左ペインにメールデータを貼り付けてください</Box>
-  }
-
   const [errors, setErrors] = useState([])
 
   const [headers, setHeaders] = useState<MailHeaderRecord[]>([])
@@ -69,6 +65,8 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
   const [mailBcc, setMailBcc] = useState<MailAddressRecord[]>([])
 
   useEffect(() => {
+    if (!mail) return
+
     new PostalMime()
       .parse(Buffer.from(mail))
       .then((email) => {
@@ -115,6 +113,10 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
   const { hasCopied: hasCopiedHtml, onCopy: onCopyHtml } =
     useClipboard(mailHtml)
 
+  if (!mail) {
+    return <Box>左ペインにメールデータを貼り付けてください</Box>
+  }
+
   if (errors.length > 0) {
     return (
       <Table>
@@ -144,12 +146,14 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
           </h2>
           <AccordionPanel pb={4}>
             <Table>
-              {headers.map((header, index) => (
-                <Tr key={`header-${index}-${header.key}`}>
-                  <Td>{header.key}</Td>
-                  <Td>{header.value}</Td>
-                </Tr>
-              ))}
+              <Tbody>
+                {headers.map((header, index) => (
+                  <Tr key={`header-${index}-${header.key}`}>
+                    <Td>{header.key}</Td>
+                    <Td>{header.value}</Td>
+                  </Tr>
+                ))}
+              </Tbody>
             </Table>
           </AccordionPanel>
         </AccordionItem>
