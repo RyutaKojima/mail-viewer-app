@@ -17,8 +17,8 @@ import {
   Text,
 } from '@chakra-ui/react'
 
-import MailAddressView from './MailAddressView'
-import CopyText from './CopyText'
+import MailAddressView from '../../MailAddressView'
+import CopyText from '../../CopyText'
 
 type Props = {
   mail: string
