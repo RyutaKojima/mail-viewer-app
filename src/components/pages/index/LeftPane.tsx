@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Box, Input, Textarea, useToast } from '@chakra-ui/react'
 
 type Props = {
@@ -11,6 +11,12 @@ export const LeftPane: React.FC<Props> = ({
   onChange,
 }): JSX.Element => {
   const toast = useToast()
+
+  const refFile = useRef(null)
+
+  const clearInputFile = () => {
+    refFile.current.value = null
+  }
 
   const toastUploadError = () => {
     toast({
@@ -48,6 +54,7 @@ export const LeftPane: React.FC<Props> = ({
     fr.onload = function () {
       const inputValue = String(fr.result)
       handleLoaded(inputValue)
+      clearInputFile()
     }
   }
 
@@ -87,7 +94,7 @@ export const LeftPane: React.FC<Props> = ({
         borderWidth="1px"
       />
 
-      <Input type="file" onChange={handleChangeFile} h="40px" p={1} />
+      <Input type="file" onChange={handleChangeFile}  ref={refFile}  h="40px" p={1} />
     </Box>
   )
 }
