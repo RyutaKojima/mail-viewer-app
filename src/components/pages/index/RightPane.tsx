@@ -21,7 +21,7 @@ export const RightPane: React.FC<Props> = ({ inputRawMail }): JSX.Element => {
       borderRadius="lg"
       overflow="hidden"
     >
-      <MailParserView mail={inputRawMail} />
+      <MailParserView mailRaw={inputRawMail} />
     </Box>
   )
 }

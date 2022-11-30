@@ -21,7 +21,7 @@ import MailAddressView from '../../MailAddressView'
 import CopyText from '../../CopyText'
 
 type Props = {
-  mail: string
+  mailRaw: string
 }
 
 type MailHeaderRecord = {
@@ -41,7 +41,7 @@ type MailAddressRecord = {
   address: string
 }
 
-export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
+export const MailParserView: React.FC<Props> = ({ mailRaw }): JSX.Element => {
   const [errors, setErrors] = useState([])
 
   const [headers, setHeaders] = useState<MailHeaderRecord[]>([])
@@ -65,10 +65,10 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
   const [mailBcc, setMailBcc] = useState<MailAddressRecord[]>([])
 
   useEffect(() => {
-    if (!mail) return
+    if (!mailRaw) return
 
     new PostalMime()
-      .parse(Buffer.from(mail))
+      .parse(Buffer.from(mailRaw))
       .then((email) => {
         // console.log(email)
         // console.log(email.html)
@@ -104,7 +104,7 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
         console.error(err)
         setErrors(['error'])
       })
-  }, [mail])
+  }, [mailRaw])
 
   const { hasCopied: hasCopiedSubject, onCopy: onCopySubject } =
     useClipboard(subject)
@@ -113,7 +113,7 @@ export const MailParserView: React.FC<Props> = ({ mail }): JSX.Element => {
   const { hasCopied: hasCopiedHtml, onCopy: onCopyHtml } =
     useClipboard(mailHtml)
 
-  if (!mail) {
+  if (!mailRaw) {
     return <Box>左ペインにメールデータを貼り付けてください</Box>
   }
 
