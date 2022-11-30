@@ -1,13 +1,9 @@
 import React from 'react'
 import { Box } from '@chakra-ui/react'
-
-type MailAddress = {
-  name: string
-  address: string
-}
+import { MailAddressRecord } from '../hooks/useMailParse'
 
 type Props = {
-  mailAddress: MailAddress
+  mailAddress: MailAddressRecord | null
 }
 
 export const MailAddressView: React.FC<Props> = ({
@@ -15,8 +11,8 @@ export const MailAddressView: React.FC<Props> = ({
 }): JSX.Element => {
   return (
     <Box>
-      {mailAddress.name}
-      &lt; {mailAddress.address} &gt;
+      {mailAddress?.name ?? ''}
+      &lt; {mailAddress?.address ?? ''} &gt;
     </Box>
   )
 }
