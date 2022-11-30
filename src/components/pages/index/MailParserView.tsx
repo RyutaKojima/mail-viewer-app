@@ -17,16 +17,19 @@ import {
 
 import MailAddressView from '../../MailAddressView'
 import CopyText from '../../CopyText'
-import { useMailParse } from '../../../hooks/useMailParse'
+import { MailInfo } from '../../../hooks/useMailParse'
 
 type Props = {
   mailRaw: string
+  mailInfo: MailInfo | null
+  errors: string[]
 }
 
-export const MailParserView: React.FC<Props> = ({ mailRaw }): JSX.Element => {
-  const { errors, mailInfo } = useMailParse(mailRaw)
-  // console.log(mailInfo)
-
+export const MailParserView: React.FC<Props> = ({
+  mailRaw,
+  mailInfo,
+  errors,
+}): JSX.Element => {
   const { hasCopied: hasCopiedSubject, onCopy: onCopySubject } = useClipboard(
     mailInfo?.subject ?? ''
   )
@@ -185,5 +188,3 @@ export const MailParserView: React.FC<Props> = ({ mailRaw }): JSX.Element => {
     </Box>
   )
 }
-
-export default MailParserView

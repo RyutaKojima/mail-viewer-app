@@ -37,7 +37,7 @@ export type MailInfo = {
   returnPath: string
 }
 
-type Return = { errors: string[]; mailInfo: MailInfo }
+type Return = { errors: string[]; mailInfo: MailInfo | null }
 
 export const useMailParse = (mailRaw: string): Return | null => {
   const [errors, setErrors] = useState([])

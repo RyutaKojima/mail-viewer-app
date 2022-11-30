@@ -1,25 +1,24 @@
 import Head from 'next/head'
 import {
   Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
   Box,
   Button,
   Center,
   chakra,
   ExpandedIndex,
-  Grid,
   Spacer,
-  Text,
 } from '@chakra-ui/react'
 import React from 'react'
-
-import { LeftPane } from '../components/pages/index/LeftPane'
-import { RightPane } from '../components/pages/index/RightPane'
 import { AppFooter } from '../components/AppFooter'
 import { AppHeader } from '../components/AppHeader'
+import dynamic from 'next/dynamic'
+
+const PageAccordionItem = dynamic(
+  () => import('../components/pages/index/PageAccordionItem'),
+  {
+    ssr: false,
+  }
+)
 
 export const Index = (): JSX.Element => {
   const [mailRaws, setMailRaws] = React.useState<string[]>([''])
@@ -83,32 +82,12 @@ export const Index = (): JSX.Element => {
           onChange={handleChangeAccordion}
         >
           {mailRaws.map((mailRaw, index) => (
-            <AccordionItem key={`mails-${index}`}>
-              <h2>
-                <AccordionButton>
-                  <AccordionIcon />
-                  <Spacer />
-                  <Text
-                    color="red"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      handleDeleteField(index)
-                    }}
-                  >
-                    ×
-                  </Text>
-                </AccordionButton>
-              </h2>
-              <AccordionPanel pb={2} w="100%">
-                <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-                  <LeftPane
-                    inputRawMail={mailRaw}
-                    onChange={(newValue) => handleInputChange(index, newValue)}
-                  />
-                  <RightPane inputRawMail={mailRaw} />
-                </Grid>
-              </AccordionPanel>
-            </AccordionItem>
+            <PageAccordionItem
+              inputRawMail={mailRaw}
+              key={`mails-${index}`}
+              onRemoveItem={() => handleDeleteField(index)}
+              onChange={(newValue) => handleInputChange(index, newValue)}
+            />
           ))}
         </Accordion>
 
