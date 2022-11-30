@@ -94,7 +94,13 @@ export const LeftPane: React.FC<Props> = ({
         borderWidth="1px"
       />
 
-      <Input type="file" onChange={handleChangeFile}  ref={refFile}  h="40px" p={1} />
+      <Input
+        type="file"
+        onChange={handleChangeFile}
+        ref={refFile}
+        h="40px"
+        p={1}
+      />
     </Box>
   )
 }
