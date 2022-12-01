@@ -17,12 +17,14 @@ import MailAddressView from '../../MailAddressView'
 type Props = {
   inputRawMail: string
   onChange: (newValue: string) => void
+  onAddFiles: (newMailRaws: string[]) => void
   onRemoveItem: () => void
 }
 
 export const PageAccordionItem: React.FC<Props> = ({
   inputRawMail,
   onChange,
+  onAddFiles,
   onRemoveItem,
 }): JSX.Element => {
   const { errors, mailInfo } = useMailParse(inputRawMail)
@@ -55,6 +57,7 @@ export const PageAccordionItem: React.FC<Props> = ({
           <LeftPane
             inputRawMail={inputRawMail}
             onChange={(newValue) => onChange(newValue)}
+            onAddFiles={(newMailRaws) => onAddFiles(newMailRaws)}
           />
           <RightPane
             inputRawMail={inputRawMail}
