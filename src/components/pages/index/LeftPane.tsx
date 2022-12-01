@@ -1,31 +1,24 @@
 import React, { useRef } from 'react'
-import { Box, Input, Textarea, useToast } from '@chakra-ui/react'
+import { Box, Input, Textarea } from '@chakra-ui/react'
+import { useAppToast } from '../../../hooks/useAppToast'
 
 type Props = {
   inputRawMail: string
   onChange: (newValue: string) => void
+  onAddFiles: (newMailRaws: string[]) => void
 }
 
 export const LeftPane: React.FC<Props> = ({
   inputRawMail,
   onChange,
+  onAddFiles,
 }): JSX.Element => {
-  const toast = useToast()
+  const { toastError } = useAppToast()
 
   const refFile = useRef(null)
 
   const clearInputFile = () => {
     refFile.current.value = null
-  }
-
-  const toastUploadError = () => {
-    toast({
-      title: 'アップロードエラー',
-      description: 'アップロード可能なのは.emlファイルを１ファイルのみです',
-      status: 'error',
-      duration: 5000,
-      isClosable: true,
-    })
   }
 
   const handleInputChange = (e) => {
@@ -34,44 +27,85 @@ export const LeftPane: React.FC<Props> = ({
     onChange(inputValue)
   }
 
-  const readFile = (
-    files: File | null,
-    handleLoaded: (inputValue: string) => void
+  const handleLoadFiles = async (
+    files: FileList | null,
+    handleLoaded: (inputValue: string) => void,
+    handleAddFiles: (inputValues: string[]) => void
   ) => {
-    if (files?.length !== 1) {
-      toastUploadError()
-      return
-    }
-
-    const targetFile = files[0]
-    if (!targetFile.name.includes('.eml')) {
-      toastUploadError()
-      return
-    }
-
-    const fr = new FileReader()
-    fr.readAsText(targetFile)
-    fr.onload = function () {
-      const inputValue = String(fr.result)
-      handleLoaded(inputValue)
+    if (files === null) {
       clearInputFile()
+      return
     }
+
+    const { readMailRaws, hasError } = await readFiles(files)
+
+    if (hasError) {
+      toastError(
+        'アップロードエラー',
+        'アップロード可能なのは.emlファイルのみです'
+      )
+    }
+
+    const mailsWithoutEmpty = readMailRaws.filter(
+      (mailRaw) => mailRaw !== ''
+    )
+
+    if (mailsWithoutEmpty.length === 1) {
+      handleLoaded(mailsWithoutEmpty[0])
+    } else {
+      handleAddFiles(mailsWithoutEmpty)
+    }
+
+    clearInputFile()
+  }
+
+  const readFiles = async (files: FileList | null) => {
+    const readMailRaws = []
+    let hasError = false
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+
+      try {
+        const mailRaw = await readFile(file)
+        readMailRaws.push(mailRaw)
+      } catch (err) {
+        readMailRaws.push('')
+        hasError = true
+      }
+    }
+
+    return { readMailRaws, hasError }
+  }
+
+  const readFile = (file: File): Promise<string | null> => {
+    return new Promise((resolve, reject) => {
+      if (!file.name.includes('.eml')) {
+        reject(new Error('アップロード可能なのは.emlファイルのみです'))
+        return
+      }
+
+      const fileReader = new FileReader()
+
+      fileReader.onload = () => {
+        const inputValue = String(fileReader.result)
+        resolve(inputValue)
+      }
+
+      fileReader.readAsText(file)
+    })
   }
 
   const handleChangeFile = (e) => {
     e.preventDefault()
 
-    const files = e.target?.files
-
-    readFile(files, (inputValue) => onChange(inputValue))
+    handleLoadFiles(e.target?.files, onChange, onAddFiles)
   }
 
   const handleDrop = (e) => {
     e.preventDefault()
 
-    const files = e.dataTransfer?.files
-
-    readFile(files, (inputValue) => onChange(inputValue))
+    handleLoadFiles(e.dataTransfer?.files, onChange, onAddFiles)
   }
 
   return (
@@ -96,6 +130,7 @@ export const LeftPane: React.FC<Props> = ({
 
       <Input
         type="file"
+        multiple={true}
         onChange={handleChangeFile}
         ref={refFile}
         h="40px"

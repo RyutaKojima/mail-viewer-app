@@ -12,6 +12,7 @@ import React from 'react'
 import { AppFooter } from '../components/AppFooter'
 import { AppHeader } from '../components/AppHeader'
 import dynamic from 'next/dynamic'
+import { useAppToast } from '../hooks/useAppToast'
 
 const PageAccordionItem = dynamic(
   () => import('../components/pages/index/PageAccordionItem'),
@@ -21,6 +22,7 @@ const PageAccordionItem = dynamic(
 )
 
 export const Index = (): JSX.Element => {
+  const { toastSuccess } = useAppToast()
   const [mailRaws, setMailRaws] = React.useState<string[]>([''])
   const [accordionOpens, setAccordionOpens] = React.useState<number[]>([0])
 
@@ -29,6 +31,15 @@ export const Index = (): JSX.Element => {
       mailRaws.map((mailRaw, index) =>
         index === targetIndex ? newValue : mailRaw
       )
+    )
+  }
+
+  const handleAddFiles = (inputMailRaws: string[]) => {
+    setMailRaws([...mailRaws, ...inputMailRaws])
+
+    toastSuccess(
+      '複数取り込み完了',
+      `${inputMailRaws.length}ファイルを末尾に追加しました`
     )
   }
 
@@ -87,6 +98,7 @@ export const Index = (): JSX.Element => {
               key={`mails-${index}`}
               onRemoveItem={() => handleDeleteField(index)}
               onChange={(newValue) => handleInputChange(index, newValue)}
+              onAddFiles={(newMailRaws) => handleAddFiles(newMailRaws)}
             />
           ))}
         </Accordion>
