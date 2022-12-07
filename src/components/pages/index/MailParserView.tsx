@@ -71,7 +71,7 @@ export const MailParserView: React.FC<Props> = ({
               <AccordionIcon />
             </AccordionButton>
           </h2>
-          <AccordionPanel pb={4}>
+          <AccordionPanel pb={4} overflow="auto">
             <Table>
               <Tbody>
                 {mailInfo?.headers.map((header, index) => (
