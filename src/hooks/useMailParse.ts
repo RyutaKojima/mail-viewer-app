@@ -41,7 +41,7 @@ type Return = { errors: string[]; mailInfo: MailInfo | null }
 
 export const useMailParse = (mailRaw: string): Return | null => {
   const [errors, setErrors] = useState([])
-  const [mailInfo, setMailInfo] = useState<MailInfo | null>(null)
+  const [mailInfo, setMailInfo] = useState(null)
 
   useEffect(() => {
     (async () => {
