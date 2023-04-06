@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box } from '@chakra-ui/react'
-import { MailAddressRecord } from '../hooks/useMailParse'
+import { MailAddressRecord } from 'src/hooks/useMailParse'
 
 type Props = {
   mailAddress: MailAddressRecord | null

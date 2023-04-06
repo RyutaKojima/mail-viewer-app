@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "dev": "next dev",
+    "dev": "next dev --port 3011",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --pretty --noEmit",

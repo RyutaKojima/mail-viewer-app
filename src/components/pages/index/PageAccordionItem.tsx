@@ -11,8 +11,8 @@ import {
 } from '@chakra-ui/react'
 import { LeftPane } from './LeftPane'
 import { RightPane } from './RightPane'
-import { useMailParse } from '../../../hooks/useMailParse'
-import MailAddressView from '../../MailAddressView'
+import { useMailParse } from 'src/hooks/useMailParse'
+import MailAddressView from 'src/components/MailAddressView'
 
 type Props = {
   inputRawMail: string

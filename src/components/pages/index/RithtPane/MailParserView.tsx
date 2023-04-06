@@ -10,14 +10,15 @@ import {
   Tbody,
   Td,
   Text,
-  Textarea,
   Tr,
   useClipboard,
 } from '@chakra-ui/react'
 
-import MailAddressView from '../../MailAddressView'
-import CopyText from '../../CopyText'
-import { MailInfo } from '../../../hooks/useMailParse'
+import CopyText from 'src/components/CopyText'
+import { MailInfo } from 'src/hooks/useMailParse'
+import MailAddressView from 'src/components/MailAddressView'
+import { BodyTextPlain } from './BodyTextPlain'
+import { BodyTextHtml } from './BodyTextHtml'
 
 type Props = {
   mailRaw: string
@@ -32,12 +33,6 @@ export const MailParserView: React.FC<Props> = ({
 }): JSX.Element => {
   const { hasCopied: hasCopiedSubject, onCopy: onCopySubject } = useClipboard(
     mailInfo?.subject ?? ''
-  )
-  const { hasCopied: hasCopiedText, onCopy: onCopyText } = useClipboard(
-    mailInfo?.text ?? ''
-  )
-  const { hasCopied: hasCopiedHtml, onCopy: onCopyHtml } = useClipboard(
-    mailInfo?.html ?? ''
   )
 
   if (!mailRaw) {
@@ -167,24 +162,10 @@ export const MailParserView: React.FC<Props> = ({
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
-      <Box mx={5} my={2}>
-        text/plain <CopyText hasCopied={hasCopiedText} onCopy={onCopyText} />
-        <Textarea
-          value={mailInfo?.text ?? ''}
-          minH="400px"
-          width="full"
-          isReadOnly={true}
-        />
-      </Box>
-      <Box mx={5} my={2}>
-        text/html <CopyText hasCopied={hasCopiedHtml} onCopy={onCopyHtml} />
-        <Textarea
-          value={mailInfo?.html ?? ''}
-          minH="400px"
-          width="full"
-          isReadOnly={true}
-        />
-      </Box>
+
+      <BodyTextPlain mailRaw={mailRaw} mailInfo={mailInfo} />
+
+      <BodyTextHtml mailRaw={mailRaw} mailInfo={mailInfo} />
     </Box>
   )
 }
