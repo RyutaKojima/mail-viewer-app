@@ -31,6 +31,9 @@
 # Editor-based Rest Client
 .idea/httpRequests
 
+# Sonarlint
+.idea/sonarlint/
+
 ##################################################
 
 # dependencies

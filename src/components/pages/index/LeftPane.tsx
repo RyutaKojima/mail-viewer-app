@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { Box, Input, Textarea } from '@chakra-ui/react'
-import { useAppToast } from '../../../hooks/useAppToast'
+import { useAppToast } from 'src/hooks/useAppToast'
 
 type Props = {
   inputRawMail: string
@@ -46,9 +46,7 @@ export const LeftPane: React.FC<Props> = ({
       )
     }
 
-    const mailsWithoutEmpty = readMailRaws.filter(
-      (mailRaw) => mailRaw !== ''
-    )
+    const mailsWithoutEmpty = readMailRaws.filter((mailRaw) => mailRaw !== '')
 
     if (mailsWithoutEmpty.length === 1) {
       handleLoaded(mailsWithoutEmpty[0])

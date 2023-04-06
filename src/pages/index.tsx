@@ -12,10 +12,10 @@ import React from 'react'
 import { AppFooter } from '../components/AppFooter'
 import { AppHeader } from '../components/AppHeader'
 import dynamic from 'next/dynamic'
-import { useAppToast } from '../hooks/useAppToast'
+import { useAppToast } from 'src/hooks/useAppToast'
 
 const PageAccordionItem = dynamic(
-  () => import('../components/pages/index/PageAccordionItem'),
+  () => import('src/components/pages/index/PageAccordionItem'),
   {
     ssr: false,
   }
