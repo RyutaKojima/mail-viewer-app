@@ -13,15 +13,18 @@ export const BodyTextHtml: React.FC<Props> = ({
   mailInfo,
 }): JSX.Element => {
   const contentType = (() => {
-    const regex = new RegExp('^Content-Type: text/html; .*$', 'gm')
+    const regex = new RegExp(
+      '^Content-Type: text/html;\\s*\\r?\\n?\\s*charset=.*$',
+      'gm'
+    )
     const matches = regex.exec(mailRaw)
     return matches && matches[0]
   })()
 
   const contentEncoding = (() => {
     const patterns = [
-      '^(?:Content-Type: text/html; .*)\\r?\\n(Content-Transfer-Encoding: .*)$',
-      '^(Content-Transfer-Encoding: .*)\\r?\\n(?:Content-Type: text/html; .*)$',
+      '^(?:Content-Type: text/html;\\s*\\r?\\n?\\s*charset=.*$)\\r?\\n(Content-Transfer-Encoding: .*)$',
+      '^(Content-Transfer-Encoding: .*)\\r?\\n(?:Content-Type: text/html;.*)$',
     ]
 
     const results = patterns
