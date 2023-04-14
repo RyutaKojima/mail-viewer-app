@@ -1,7 +1,17 @@
-import { Box, Textarea, useClipboard } from '@chakra-ui/react'
+import {
+  Box,
+  FormControl,
+  FormLabel,
+  Switch,
+  Textarea,
+  useClipboard,
+} from '@chakra-ui/react'
 import { MailInfo } from 'src/hooks/useMailParse'
 import CopyText from 'src/components/CopyText'
 import TagLabel from 'src/components/TagLabel'
+import { StringNewlineCharacter } from '../../../../domains/StringNewlineCharacter'
+import React from 'react'
+import RichTextViewer from '../../../base/RichTextViewer'
 
 type Props = {
   mailRaw: string
@@ -12,6 +22,8 @@ export const BodyTextHtml: React.FC<Props> = ({
   mailRaw,
   mailInfo,
 }): JSX.Element => {
+  const [isUseRichViewer, setIsUseRichViewer] = React.useState<boolean>(false)
+
   const contentType = (() => {
     const regex = new RegExp(
       '^Content-Type: text/html;\\s*\\r?\\n?\\s*charset=.*$',
@@ -40,13 +52,39 @@ export const BodyTextHtml: React.FC<Props> = ({
 
   const { value, hasCopied, onCopy } = useClipboard(mailInfo?.html ?? '')
 
+  const breakCode = StringNewlineCharacter(value)
+
   return (
     <Box mx={5} my={2}>
       text/html
       <CopyText hasCopied={hasCopied} onCopy={onCopy} />
-      {(() => contentType && <TagLabel>{contentType}</TagLabel>)()}
-      {(() => contentEncoding && <TagLabel>{contentEncoding}</TagLabel>)()}
-      <Textarea value={value} minH="400px" width="full" isReadOnly={true} />
+      <div>
+        {(() => contentType && <TagLabel>{contentType}</TagLabel>)()}
+        {(() => contentEncoding && <TagLabel>{contentEncoding}</TagLabel>)()}
+        <TagLabel>{breakCode}</TagLabel>
+      </div>
+      <FormControl display="flex" alignItems="center">
+        <FormLabel htmlFor="email-alerts" mb="0">
+          改行コード表示
+        </FormLabel>
+        <Switch
+          id="email-alerts"
+          isChecked={isUseRichViewer}
+          onChange={(event) => setIsUseRichViewer(event.target.checked)}
+        />
+      </FormControl>
+      {(() =>
+        isUseRichViewer ? (
+          <RichTextViewer value={value} />
+        ) : (
+          <Textarea
+            value={value}
+            minH="400px"
+            width="full"
+            padding={2}
+            isReadOnly={true}
+          />
+        ))()}
     </Box>
   )
 }
