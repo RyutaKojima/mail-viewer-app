@@ -17,7 +17,7 @@
     "@emotion/react": "11.10.6",
     "@emotion/styled": "11.10.6",
     "framer-motion": "10.12.4",
-    "next": "13.3.0",
+    "next": "13.3.2",
     "postal-mime": "1.0.16",
     "react": "18.2.0",
     "react-dom": "18.2.0",
