@@ -16,7 +16,7 @@
     "@chakra-ui/react": "2.7.1",
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
-    "framer-motion": "10.12.18",
+    "framer-motion": "10.13.0",
     "next": "13.4.9",
     "postal-mime": "1.0.16",
     "react": "18.2.0",
