@@ -5138,10 +5138,10 @@ pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-postal-mime@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/postal-mime/-/postal-mime-1.1.0.tgz#3804873e6f247077b6034b7029a200c1c3317f37"
-  integrity sha512-IyYhoZpCq/I9l9om5soJ5Ch5vsS76EGu/tn7mHQGiAEmIKf2uvr3TdiYTB56FmD5bOm78eYjCPryM+0GuJcMJg==
+postal-mime@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/postal-mime/-/postal-mime-2.0.1.tgz#51b4f13f1b0120e46abba3e73a0a18e9041459e0"
+  integrity sha512-ZsPbRsHlMv6ODJ99hCCZJf6BX0b3zZMX3Ydun8xPOKtkeDieaTxH6aPx6o3tkOYausufWiXPa/npdSuQjWsLwA==
 
 postcss@8.4.31:
   version "8.4.31"
