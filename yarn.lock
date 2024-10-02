@@ -5257,10 +5257,10 @@ possible-typed-array-names@^1.0.0:
   resolved "https://registry.yarnpkg.com/possible-typed-array-names/-/possible-typed-array-names-1.0.0.tgz#89bb63c6fada2c3e90adc4a647beeeb39cc7bf8f"
   integrity sha512-d7Uw+eZoloe0EHDIYoe+bQ5WXnGMOpmiZFTuMWCwpjzzkL2nTjcKiAk4hh8TjnGye2TwWOk3UXucZ+3rbmBa8Q==
 
-postal-mime@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/postal-mime/-/postal-mime-2.0.2.tgz#add1974424055a0182b507aa37cdb0de22ce985a"
-  integrity sha512-xenIIdC8u7NJFXGrhPafHqEpAWJTU7SVbtCsgIKSMEGv+coUbPOkA6LDl0geFPprkqXsZFtwfAgGCEbvDuzjTg==
+postal-mime@2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/postal-mime/-/postal-mime-2.3.2.tgz#fb2ac8c84b962c487193a2bdf78cbdaf1ab0ecdc"
+  integrity sha512-OZaLbLfLBEJa0ENZRuRwhAminaJevjqHtSICcegO4VOc4QgNHAzNTfVT3gN+KO9YyPFPZQOZ9vtJNmv0n2y8tQ==
 
 postcss@8.4.31:
   version "8.4.31"
