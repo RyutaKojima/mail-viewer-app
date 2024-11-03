@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "20.x"
+  },
   "private": true,
   "scripts": {
     "prepare": "husky install",
@@ -9,7 +12,7 @@
     "format": "prettier --write . && yarn lint --fix",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest",
-    "test-all": "yarn lint && yarn type-check && yarn src/test"
+    "test-all": "yarn lint && yarn type-check && yarn test"
   },
   "dependencies": {
     "@chakra-ui/icons": "2.2.4",
