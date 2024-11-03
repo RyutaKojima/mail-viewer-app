@@ -31,8 +31,12 @@
 # Editor-based Rest Client
 .idea/httpRequests
 
-# Sonarlint
+# JetBrains Plugins...
 .idea/sonarlint/
+.idea/active-tab-highlighter.xml
+.idea/active-tab-highlighter-v2.xml
+.idea/git_toolbox_blame.xml
+
 
 ##################################################
 
