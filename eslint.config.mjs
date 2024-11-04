@@ -59,9 +59,12 @@ export default [
       '@typescript-eslint/no-use-before-define': 0,
 
       '@typescript-eslint/no-unused-vars': [
-        2,
+        'error',
         {
           argsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
         },
       ],
 
