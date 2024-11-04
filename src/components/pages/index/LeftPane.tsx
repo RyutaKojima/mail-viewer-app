@@ -30,7 +30,7 @@ export const LeftPane: React.FC<Props> = ({
   const handleLoadFiles = async (
     files: FileList | null,
     handleLoaded: (inputValue: string) => void,
-    handleAddFiles: (inputValues: string[]) => void
+    handleAddFiles: (inputValues: string[]) => void,
   ) => {
     if (files === null) {
       clearInputFile()
@@ -42,7 +42,7 @@ export const LeftPane: React.FC<Props> = ({
     if (hasError) {
       toastError(
         'アップロードエラー',
-        'アップロード可能なのは.emlファイルのみです'
+        'アップロード可能なのは.emlファイルのみです',
       )
     }
 
@@ -67,7 +67,7 @@ export const LeftPane: React.FC<Props> = ({
       try {
         const mailRaw = await readFile(file)
         readMailRaws.push(mailRaw)
-      } catch (err) {
+      } catch (_err) {
         readMailRaws.push('')
         hasError = true
       }
