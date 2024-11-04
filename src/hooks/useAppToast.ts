@@ -6,7 +6,7 @@ export const useAppToast = () => {
   const toastSuccess = (
     title: string,
     description?: string,
-    options?: UseToastOptions
+    options?: UseToastOptions,
   ) => {
     toast({
       title,
@@ -21,7 +21,7 @@ export const useAppToast = () => {
   const toastError = (
     title: string,
     description?: string,
-    options?: UseToastOptions
+    options?: UseToastOptions,
   ) => {
     toast({
       title,

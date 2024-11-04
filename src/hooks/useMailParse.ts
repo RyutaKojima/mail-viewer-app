@@ -44,7 +44,7 @@ export const useMailParse = (mailRaw: string): Return | null => {
   const [mailInfo, setMailInfo] = useState(null)
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       if (!mailRaw) {
         setMailInfo(null)
         setErrors([])

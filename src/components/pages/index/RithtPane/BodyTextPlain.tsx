@@ -27,7 +27,7 @@ export const BodyTextPlain: React.FC<Props> = ({
   const contentType = (() => {
     const regex = new RegExp(
       '^Content-Type: text/plain;\\s*\\r?\\n?\\s*charset=.*$',
-      'gm'
+      'gm',
     )
     const matches = regex.exec(mailRaw)
     return matches && matches[0]
