@@ -27,7 +27,7 @@ export const BodyTextHtml: React.FC<Props> = ({
   const contentType = (() => {
     const regex = new RegExp(
       '^Content-Type: text/html;\\s*\\r?\\n?\\s*charset=.*$',
-      'gm'
+      'gm',
     )
     const matches = regex.exec(mailRaw)
     return matches && matches[0]

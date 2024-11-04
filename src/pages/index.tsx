@@ -18,7 +18,7 @@ const PageAccordionItem = dynamic(
   () => import('src/components/pages/index/PageAccordionItem'),
   {
     ssr: false,
-  }
+  },
 )
 
 export const Index = (): JSX.Element => {
@@ -29,8 +29,8 @@ export const Index = (): JSX.Element => {
   const handleInputChange = (targetIndex: number, newValue: string) => {
     setMailRaws(
       mailRaws.map((mailRaw, index) =>
-        index === targetIndex ? newValue : mailRaw
-      )
+        index === targetIndex ? newValue : mailRaw,
+      ),
     )
   }
 
@@ -39,13 +39,13 @@ export const Index = (): JSX.Element => {
 
     toastSuccess(
       '複数取り込み完了',
-      `${inputMailRaws.length}ファイルを末尾に追加しました`
+      `${inputMailRaws.length}ファイルを末尾に追加しました`,
     )
   }
 
   const handleChangeAccordion = (expandedIndex: ExpandedIndex) => {
     setAccordionOpens(
-      Array.isArray(expandedIndex) ? expandedIndex : [expandedIndex]
+      Array.isArray(expandedIndex) ? expandedIndex : [expandedIndex],
     )
   }
 
@@ -64,7 +64,7 @@ export const Index = (): JSX.Element => {
     setAccordionOpens(
       accordionOpens
         .filter((v) => v !== targetIndex)
-        .map((v) => (v > targetIndex ? v - 1 : v))
+        .map((v) => (v > targetIndex ? v - 1 : v)),
     )
     setMailRaws(mailRaws.filter((_v, index) => index !== targetIndex))
   }

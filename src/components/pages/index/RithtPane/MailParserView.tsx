@@ -32,7 +32,7 @@ export const MailParserView: React.FC<Props> = ({
   errors,
 }): JSX.Element => {
   const { hasCopied: hasCopiedSubject, onCopy: onCopySubject } = useClipboard(
-    mailInfo?.subject ?? ''
+    mailInfo?.subject ?? '',
   )
 
   if (!mailRaw) {
