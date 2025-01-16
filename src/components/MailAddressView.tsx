@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { JSX } from 'react'
 import { Box } from '@chakra-ui/react'
 import { MailAddressRecord } from 'src/hooks/useMailParse'
 

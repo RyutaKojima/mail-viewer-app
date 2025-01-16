@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { JSX, useRef } from 'react'
 import { Box, Input, Textarea } from '@chakra-ui/react'
 import { useAppToast } from 'src/hooks/useAppToast'
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { JSX } from 'react'
 import { Center, chakra } from '@chakra-ui/react'
 import { EmailIcon } from '@chakra-ui/icons'
 

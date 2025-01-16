@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { JSX } from 'react'
 import { Box } from '@chakra-ui/react'
 import { MailInfo } from 'src/hooks/useMailParse'
 import { MailParserView } from './RithtPane/MailParserView'
