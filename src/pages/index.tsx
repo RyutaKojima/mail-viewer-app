@@ -5,14 +5,14 @@ import {
   Button,
   Center,
   chakra,
-  ExpandedIndex,
   Spacer,
 } from '@chakra-ui/react'
 import React, { JSX } from 'react'
-import { AppFooter } from '../components/AppFooter'
-import { AppHeader } from '../components/AppHeader'
 import dynamic from 'next/dynamic'
-import { useAppToast } from 'src/hooks/useAppToast'
+
+import { useAppToast } from '@/hooks/useAppToast'
+import { AppFooter } from '@/components/AppFooter'
+import { AppHeader } from '@/components/AppHeader'
 
 const PageAccordionItem = dynamic(
   () => import('src/components/pages/index/PageAccordionItem'),
@@ -43,7 +43,7 @@ export const Index = (): JSX.Element => {
     )
   }
 
-  const handleChangeAccordion = (expandedIndex: ExpandedIndex) => {
+  const handleChangeAccordion = (expandedIndex) => {
     setAccordionOpens(
       Array.isArray(expandedIndex) ? expandedIndex : [expandedIndex],
     )

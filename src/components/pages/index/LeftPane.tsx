@@ -1,6 +1,6 @@
 import React, { JSX, useRef } from 'react'
 import { Box, Input, Textarea } from '@chakra-ui/react'
-import { useAppToast } from 'src/hooks/useAppToast'
+import { useAppToast } from '@/hooks/useAppToast'
 
 type Props = {
   inputRawMail: string
