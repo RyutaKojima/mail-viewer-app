@@ -1,7 +1,7 @@
 import React, { JSX } from 'react'
 import { Box } from '@chakra-ui/react'
-import { MailInfo } from 'src/hooks/useMailParse'
-import { MailParserView } from './RithtPane/MailParserView'
+import { MailInfo } from '@/hooks/useMailParse'
+import { MailParserView } from '@/components/pages/index/RithtPane/MailParserView'
 
 type Props = {
   inputRawMail: string

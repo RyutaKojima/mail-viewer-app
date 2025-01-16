@@ -9,10 +9,11 @@ import {
   Spacer,
   Text,
 } from '@chakra-ui/react'
-import { LeftPane } from './LeftPane'
-import { RightPane } from './RightPane'
-import { useMailParse } from 'src/hooks/useMailParse'
-import MailAddressView from 'src/components/MailAddressView'
+
+import { useMailParse } from '@/hooks/useMailParse'
+import MailAddressView from '@/components/MailAddressView'
+import { LeftPane } from '@/components/pages/index/LeftPane'
+import { RightPane } from '@/components/pages/index/RightPane'
 
 type Props = {
   inputRawMail: string

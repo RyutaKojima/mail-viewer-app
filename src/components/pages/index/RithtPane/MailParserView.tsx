@@ -13,13 +13,13 @@ import {
   Tr,
   useClipboard,
 } from '@chakra-ui/react'
-
-import CopyText from 'src/components/CopyText'
-import { MailInfo } from 'src/hooks/useMailParse'
-import MailAddressView from 'src/components/MailAddressView'
-import { BodyTextPlain } from './BodyTextPlain'
-import { BodyTextHtml } from './BodyTextHtml'
 import { JSX } from 'react'
+
+import CopyText from '@/components/CopyText'
+import { MailInfo } from '@/hooks/useMailParse'
+import MailAddressView from '@/components/MailAddressView'
+import { BodyTextPlain } from '@/components/pages/index/RithtPane/BodyTextPlain'
+import { BodyTextHtml } from '@/components/pages/index/RithtPane/BodyTextHtml'
 
 type Props = {
   mailRaw: string

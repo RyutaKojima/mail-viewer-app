@@ -6,12 +6,13 @@ import {
   Textarea,
   useClipboard,
 } from '@chakra-ui/react'
-import { MailInfo } from 'src/hooks/useMailParse'
-import CopyText from 'src/components/CopyText'
-import TagLabel from 'src/components/TagLabel'
-import { StringNewlineCharacter } from '../../../../domains/StringNewlineCharacter'
 import React, { JSX } from 'react'
-import RichTextViewer from '../../../base/RichTextViewer'
+
+import { StringNewlineCharacter } from '@/domains/StringNewlineCharacter'
+import { MailInfo } from '@/hooks/useMailParse'
+import CopyText from '@/components/CopyText'
+import TagLabel from '@/components/TagLabel'
+import RichTextViewer from '@/components/base/RichTextViewer'
 
 type Props = {
   mailRaw: string
