@@ -8,7 +8,7 @@ import {
   ExpandedIndex,
   Spacer,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { JSX } from 'react'
 import { AppFooter } from '../components/AppFooter'
 import { AppHeader } from '../components/AppHeader'
 import dynamic from 'next/dynamic'

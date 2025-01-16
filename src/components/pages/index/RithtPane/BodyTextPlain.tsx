@@ -9,7 +9,7 @@ import {
 import { MailInfo } from 'src/hooks/useMailParse'
 import CopyText from 'src/components/CopyText'
 import TagLabel from 'src/components/TagLabel'
-import React from 'react'
+import React, { JSX } from 'react'
 import RichTextViewer from '../../../base/RichTextViewer'
 import { StringNewlineCharacter } from '../../../../domains/StringNewlineCharacter'
 

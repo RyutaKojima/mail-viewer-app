@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import { v4 as uuidV4 } from 'uuid'
 import TagLabel from '../TagLabel'
+import { JSX } from 'react'
 
 type Props = {
   value: string

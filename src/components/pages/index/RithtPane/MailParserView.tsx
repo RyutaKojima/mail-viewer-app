@@ -19,6 +19,7 @@ import { MailInfo } from 'src/hooks/useMailParse'
 import MailAddressView from 'src/components/MailAddressView'
 import { BodyTextPlain } from './BodyTextPlain'
 import { BodyTextHtml } from './BodyTextHtml'
+import { JSX } from 'react'
 
 type Props = {
   mailRaw: string

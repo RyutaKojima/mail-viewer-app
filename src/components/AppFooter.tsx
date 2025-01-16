@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { JSX } from 'react'
 import { Center, chakra } from '@chakra-ui/react'
 
 export const AppFooter: React.FC = (): JSX.Element => {

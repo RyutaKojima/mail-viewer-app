@@ -1,5 +1,5 @@
 import { Tag } from '@chakra-ui/react'
-import { ReactNode } from 'react'
+import { JSX, ReactNode } from 'react'
 
 type Props = {
   colorScheme?:
