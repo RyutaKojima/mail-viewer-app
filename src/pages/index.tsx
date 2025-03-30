@@ -80,7 +80,7 @@ export const Index = (): JSX.Element => {
     >
       <Head>
         <title>Mail Viewer</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
 
       <AppHeader />
