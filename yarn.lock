@@ -5156,10 +5156,10 @@ possible-typed-array-names@^1.0.0:
   resolved "https://registry.yarnpkg.com/possible-typed-array-names/-/possible-typed-array-names-1.0.0.tgz#89bb63c6fada2c3e90adc4a647beeeb39cc7bf8f"
   integrity sha512-d7Uw+eZoloe0EHDIYoe+bQ5WXnGMOpmiZFTuMWCwpjzzkL2nTjcKiAk4hh8TjnGye2TwWOk3UXucZ+3rbmBa8Q==
 
-postal-mime@2.4.3:
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/postal-mime/-/postal-mime-2.4.3.tgz#1e89870debfeeb9a5f62de61332198a31205289c"
-  integrity sha512-KT8P+/We7LH48EhjmLRLEiQx+HI6zZ5TTeuzhuZkMbcJnp9mdmxm/FgiRIzmhZm8mxmk8mtisIAelq1wNwumxg==
+postal-mime@2.4.4:
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/postal-mime/-/postal-mime-2.4.4.tgz#5f398b56d3d7f9f9d44dd6be2b250257656463dd"
+  integrity sha512-LDaFIsmGO+uNnPu28H52cubuHrovfewviU8Y8p+KgIKGVF871t/IQxzlO8QwhJMiG0ih2Lk2jTL3aGVoNz3NZQ==
 
 postcss@8.4.31:
   version "8.4.31"
