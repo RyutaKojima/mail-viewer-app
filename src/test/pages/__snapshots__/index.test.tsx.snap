@@ -1,21 +1,21 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Home page matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="css-1tyio8u"
+    class="css-16fqqow"
   >
     <header
-      class="css-1o3848f"
+      class="css-13nyug4"
     >
       <div
         class="css-gmuwbf"
       >
         <h1
-          class="css-0"
+          class="css-1tapsqs"
         >
           <svg
-            class="chakra-icon css-onkibi"
+            class="chakra-icon css-l5wtxs"
             focusable="false"
             viewBox="0 0 24 24"
           >
@@ -34,25 +34,28 @@ exports[`Home page matches snapshot 1`] = `
         </h1>
       </div>
     </header>
-    <main>
+    <main
+      class="css-feza7v"
+    >
       <div
-        class="css-1p6s0yy"
+        class="chakra-accordion css-8atqhb"
+      />
+      <div
+        class="css-z9omnh"
       >
-        <div
-          class="css-da66gq"
+        <button
+          class="chakra-button css-4xx2wk"
+          type="button"
         >
-          <textarea
-            class="chakra-textarea css-11663sq"
-            placeholder="ここにメールデータを入力"
-          />
-        </div>
-        <div
-          class="css-da66gq"
-        />
+          New Field
+        </button>
       </div>
     </main>
+    <div
+      class="css-17xejub"
+    />
     <footer
-      class="css-1f7brxj"
+      class="css-17dx8lg"
     >
       <div
         class="css-gmuwbf"
