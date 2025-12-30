@@ -22,7 +22,7 @@
     "@vercel/analytics": "^1.6.1",
     "framer-motion": "12.23.12",
     "next": "^16.1.1",
-    "postal-mime": "2.4.4",
+    "postal-mime": "2.7.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "uuid": "^13.0.0"
