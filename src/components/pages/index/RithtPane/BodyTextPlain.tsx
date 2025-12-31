@@ -49,14 +49,14 @@ export const BodyTextPlain: React.FC<Props> = ({
     return results[0] ?? null
   })()
 
-  const { value, hasCopied, onCopy } = useClipboard(mailInfo?.text ?? '')
+  const { value, copied, copy } = useClipboard({ value: mailInfo?.text ?? '' })
 
   const breakCode = StringNewlineCharacter(value)
 
   return (
     <Box mx={5} my={2}>
       text/plain
-      <CopyText hasCopied={hasCopied} onCopy={onCopy} />
+      <CopyText hasCopied={copied} onCopy={copy} />
       <div>
         {(() => contentType && <TagLabel>{contentType}</TagLabel>)()}
         {(() => contentEncoding && <TagLabel>{contentEncoding}</TagLabel>)()}

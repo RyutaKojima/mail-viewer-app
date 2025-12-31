@@ -29,9 +29,9 @@ export const MailParserView: React.FC<Props> = ({
   mailInfo,
   errors,
 }): JSX.Element => {
-  const { hasCopied: hasCopiedSubject, onCopy: onCopySubject } = useClipboard(
-    mailInfo?.subject ?? '',
-  )
+  const { copied: hasCopiedSubject, copy: onCopySubject } = useClipboard({
+    value: mailInfo?.subject ?? '',
+  })
 
   if (!mailRaw) {
     return <Box>左ペインにメールデータを貼り付けてください</Box>
