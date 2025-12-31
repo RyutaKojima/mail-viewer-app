@@ -1,19 +1,22 @@
-import { useToast, UseToastOptions } from '@chakra-ui/react'
+import { toaster } from "@/components/ui/toaster"
+
+export interface ToastOptions {
+  duration?: number;
+  isClosable?: boolean;
+  [key: string]: any;
+}
 
 export const useAppToast = () => {
-  const toast = useToast()
-
   const toastSuccess = (
     title: string,
     description?: string,
-    options?: UseToastOptions,
+    options?: ToastOptions,
   ) => {
-    toast({
+    toaster.create({
       title,
       description,
-      status: 'success',
+      type: 'success',
       duration: 4000,
-      isClosable: true,
       ...options,
     })
   }
@@ -21,14 +24,13 @@ export const useAppToast = () => {
   const toastError = (
     title: string,
     description?: string,
-    options?: UseToastOptions,
+    options?: ToastOptions,
   ) => {
-    toast({
+    toaster.create({
       title,
       description,
-      status: 'error',
+      type: 'error',
       duration: 4000,
-      isClosable: true,
       ...options,
     })
   }

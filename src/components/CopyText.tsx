@@ -1,5 +1,6 @@
-import { Tooltip } from '@chakra-ui/react'
-import { CheckIcon, CopyIcon } from '@chakra-ui/icons'
+import { Tooltip } from '@/components/ui/tooltip'
+import { FaCheck, FaCopy } from 'react-icons/fa'
+import { Icon } from '@chakra-ui/react'
 import { JSX } from 'react'
 
 type Props = {
@@ -15,24 +16,25 @@ export const CopyText: React.FC<Props> = ({
     <>
       {hasCopied ? (
         <Tooltip
-          hasArrow
-          placement="top"
-          bg="green.100"
-          color="black"
-          defaultIsOpen={true}
-          label="Copied!!"
+          content="Copied!!"
+          positioning={{ placement: "top" }}
+          defaultOpen={true}
         >
-          <CheckIcon ml={2} w={6} h={6} color="green.500" />
+          <Icon ml={2} w={6} h={6} color="green.500">
+            <FaCheck />
+          </Icon>
         </Tooltip>
       ) : (
-        <CopyIcon
+        <Icon
           ml={2}
           w={6}
           h={6}
           color="blue.300"
           cursor="pointer"
           onClick={onCopy}
-        />
+        >
+          <FaCopy />
+        </Icon>
       )}
     </>
   )
