@@ -1,10 +1,8 @@
-import { Tag } from '@chakra-ui/react'
+import { Tag } from '@/components/ui/tag'
 import { JSX, ReactNode } from 'react'
 
 type Props = {
   colorScheme?:
-    | 'whiteAlpha'
-    | 'blackAlpha'
     | 'gray'
     | 'red'
     | 'orange'
@@ -15,12 +13,6 @@ type Props = {
     | 'cyan'
     | 'purple'
     | 'pink'
-    | 'linkedin'
-    | 'facebook'
-    | 'messenger'
-    | 'whatsapp'
-    | 'twitter'
-    | 'telegram'
     | null
   size?: 'sm' | 'md' | 'lg' | null
   children: ReactNode
@@ -32,7 +24,7 @@ export const TagLabel: React.FC<Props> = ({
   children,
 }): JSX.Element => {
   return (
-    <Tag size={size} variant="outline" colorScheme={colorScheme}>
+    <Tag size={size} variant="outline" colorPalette={colorScheme ?? 'green'}>
       {children}
     </Tag>
   )

@@ -1,11 +1,9 @@
 import {
   Box,
-  FormControl,
-  FormLabel,
-  Switch,
   Textarea,
   useClipboard,
 } from '@chakra-ui/react'
+import { Switch } from "@/components/ui/switch"
 import React, { JSX } from 'react'
 
 import { MailInfo } from '@/hooks/useMailParse'
@@ -51,29 +49,29 @@ export const BodyTextPlain: React.FC<Props> = ({
     return results[0] ?? null
   })()
 
-  const { value, hasCopied, onCopy } = useClipboard(mailInfo?.text ?? '')
+  const { value, copied, copy } = useClipboard({ value: mailInfo?.text ?? '' })
 
   const breakCode = StringNewlineCharacter(value)
 
   return (
     <Box mx={5} my={2}>
       text/plain
-      <CopyText hasCopied={hasCopied} onCopy={onCopy} />
+      <CopyText hasCopied={copied} onCopy={copy} />
       <div>
         {(() => contentType && <TagLabel>{contentType}</TagLabel>)()}
         {(() => contentEncoding && <TagLabel>{contentEncoding}</TagLabel>)()}
         <TagLabel>{breakCode}</TagLabel>
       </div>
-      <FormControl display="flex" alignItems="center">
-        <FormLabel htmlFor="email-alerts" mb="0">
+      <Box display="flex" alignItems="center" gap={2} my={2}>
+        <label htmlFor="email-alerts" style={{ marginBottom: 0 }}>
           改行コード表示
-        </FormLabel>
+        </label>
         <Switch
           id="email-alerts"
-          isChecked={isUseRichViewer}
-          onChange={(event) => setIsUseRichViewer(event.target.checked)}
+          checked={isUseRichViewer}
+          onCheckedChange={(e) => setIsUseRichViewer(e.checked)}
         />
-      </FormControl>
+      </Box>
       {(() =>
         isUseRichViewer ? (
           <RichTextViewer value={value} />
@@ -83,7 +81,7 @@ export const BodyTextPlain: React.FC<Props> = ({
             minH="400px"
             width="full"
             padding={2}
-            isReadOnly={true}
+            readOnly={true}
           />
         ))()}
     </Box>
